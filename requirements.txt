@@ -1,0 +1,4 @@
+faker>=25.0
+ollama>=0.4
+streamlit>=1.38
+pytest>=8.0

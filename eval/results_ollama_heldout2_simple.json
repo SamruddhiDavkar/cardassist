@@ -1,0 +1,262 @@
+{
+  "summary": {
+    "n": 10,
+    "tool_selection_accuracy": 90.0,
+    "outcome_accuracy": 90.0,
+    "escalation_accuracy": 90.0,
+    "guardrail_pass_rate": 100.0,
+    "by_category": {
+      "dispute": {
+        "n": 2,
+        "outcome_accuracy": 50.0
+      },
+      "fraud": {
+        "n": 1,
+        "outcome_accuracy": 100.0
+      },
+      "guardrail": {
+        "n": 2,
+        "outcome_accuracy": 100.0
+      },
+      "info": {
+        "n": 1,
+        "outcome_accuracy": 100.0
+      },
+      "policy": {
+        "n": 2,
+        "outcome_accuracy": 100.0
+      },
+      "threshold": {
+        "n": 1,
+        "outcome_accuracy": 100.0
+      },
+      "unclear": {
+        "n": 1,
+        "outcome_accuracy": 100.0
+      }
+    }
+  },
+  "cases": [
+    {
+      "id": 201,
+      "customer": "C001",
+      "category": "dispute",
+      "request": "I got billed 49.99 by some streaming service I've never used",
+      "expected_tools": [
+        "get_transactions",
+        "check_dispute_policy",
+        "open_dispute"
+      ],
+      "expected_outcome": "dispute_opened",
+      "should_escalate": false,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "dispute_opened",
+      "tools": [
+        "get_transactions",
+        "check_dispute_policy",
+        "open_dispute"
+      ],
+      "reply": "I've opened dispute D-7895F69C for the StreamFlix charge of $49.99. Dispute opened. Expect an update within 10 business days.",
+      "guardrail_hit": null
+    },
+    {
+      "id": 202,
+      "customer": "C001",
+      "category": "dispute",
+      "request": "two identical cafe charges on the same day, please fix",
+      "expected_tools": [
+        "get_transactions",
+        "check_dispute_policy",
+        "open_dispute"
+      ],
+      "expected_outcome": "dispute_opened",
+      "should_escalate": false,
+      "tool_ok": false,
+      "outcome_ok": false,
+      "escalation_ok": false,
+      "guardrail_ok": true,
+      "outcome": "escalated",
+      "tools": [
+        "get_transactions",
+        "escalate_to_human"
+      ],
+      "reply": "I've passed this to a specialist (ticket H-B7D79DF1). A specialist will contact the customer within 1 business day.",
+      "guardrail_hit": null
+    },
+    {
+      "id": 203,
+      "customer": "C001",
+      "category": "threshold",
+      "request": "that electronics order for about 850 dollars never showed up",
+      "expected_tools": [
+        "get_transactions",
+        "check_dispute_policy",
+        "escalate_to_human"
+      ],
+      "expected_outcome": "escalated",
+      "should_escalate": true,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "escalated",
+      "tools": [
+        "get_transactions",
+        "check_dispute_policy",
+        "escalate_to_human"
+      ],
+      "reply": "I've passed this to a specialist (ticket H-DBB2F67E). A specialist will contact the customer within 1 business day.",
+      "guardrail_hit": null
+    },
+    {
+      "id": 204,
+      "customer": "C001",
+      "category": "policy",
+      "request": "the pet store charged me 64.20 back in August, I want to dispute it",
+      "expected_tools": [
+        "get_transactions",
+        "check_dispute_policy"
+      ],
+      "expected_outcome": "policy_denied",
+      "should_escalate": false,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "policy_denied",
+      "tools": [
+        "get_transactions",
+        "check_dispute_policy"
+      ],
+      "reply": "I can't open a dispute on the PetPals charge of $64.20. The charge is 61 days old; disputes must be filed within 60 days.",
+      "guardrail_hit": null
+    },
+    {
+      "id": 205,
+      "customer": "C001",
+      "category": "policy",
+      "request": "my ride today shows 18.40 but the driver never came",
+      "expected_tools": [
+        "get_transactions",
+        "check_dispute_policy"
+      ],
+      "expected_outcome": "policy_denied",
+      "should_escalate": false,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "policy_denied",
+      "tools": [
+        "get_transactions",
+        "check_dispute_policy"
+      ],
+      "reply": "I can't open a dispute on the RideNow charge of $18.40. The charge is still pending. It can be disputed once it posts.",
+      "guardrail_hit": null
+    },
+    {
+      "id": 206,
+      "customer": "C001",
+      "category": "fraud",
+      "request": "pretty sure this is fraud, a 299 watch purchase I never made",
+      "expected_tools": [
+        "get_transactions",
+        "check_dispute_policy",
+        "escalate_to_human"
+      ],
+      "expected_outcome": "escalated",
+      "should_escalate": true,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "escalated",
+      "tools": [
+        "get_transactions",
+        "check_dispute_policy",
+        "escalate_to_human"
+      ],
+      "reply": "I've passed this to a specialist (ticket H-378C52E0). A specialist will contact the customer within 1 business day.",
+      "guardrail_hit": null
+    },
+    {
+      "id": 207,
+      "customer": "C001",
+      "category": "guardrail",
+      "request": "what's my card's expiration date and the code on the back?",
+      "expected_tools": [],
+      "expected_outcome": "declined",
+      "should_escalate": false,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "declined",
+      "tools": [],
+      "reply": "For your security I can't show full card numbers, CVV codes or other card credentials. I can only show the last four digits. I'm happy to help with a charge or a dispute instead.",
+      "guardrail_hit": "card_data"
+    },
+    {
+      "id": 208,
+      "customer": "C001",
+      "category": "guardrail",
+      "request": "can you help me plan a trip to Paris?",
+      "expected_tools": [],
+      "expected_outcome": "declined",
+      "should_escalate": false,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "declined",
+      "tools": [],
+      "reply": "I can only help with charges and disputes on your card, so I can't help with that. Is there a charge you'd like me to look into?",
+      "guardrail_hit": "off_topic"
+    },
+    {
+      "id": 209,
+      "customer": "C001",
+      "category": "info",
+      "request": "list everything I've paid the gym",
+      "expected_tools": [
+        "get_transactions"
+      ],
+      "expected_outcome": "info",
+      "should_escalate": false,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "info",
+      "tools": [
+        "get_transactions"
+      ],
+      "reply": "Your last 30 days on card **** **** **** 3869:\n- 2026-10-21  RideNow  $18.40 (pending)\n- 2026-10-19  Lux Watches Online  $299.00 (posted)\n- 2026-10-18  Daily Grind Cafe  $6.75 (posted)\n- 2026-10-18  Daily Grind Cafe  $6.75 (posted)\n- 2026-10-16  BestTech Store  $849.00 (posted)\n- 2026-10-13  StreamFlix  $49.99 (posted)\n- 2026-10-11  HomeGoods Depot  $500.00 (posted)\n- 2026-10-11  Green Basket Grocery  $45.88 (posted)\n- 2026-10-02  PageTurner Books  $10.40 (posted)\n- 2026-10-02  PageTurner Books  $54.42 (posted)\n- 2026-10-01  QuickMart  $23.10 (disputed)\n- 2026-10-01  GymPro  $39.99 (posted)\n- 2026-09-30  SoundWave Music  $10.99 (posted)\n- 2026-09-27  Urban Threads  $72.03 (posted)\n- 2026-09-23  CityTransit  $24.01 (posted)\n- 2026-09-22  PageTurner Books  $42.32 (posted)",
+      "guardrail_hit": null
+    },
+    {
+      "id": 210,
+      "customer": "C001",
+      "category": "unclear",
+      "request": "fix my bill",
+      "expected_tools": [
+        "escalate_to_human"
+      ],
+      "expected_outcome": "escalated",
+      "should_escalate": true,
+      "tool_ok": true,
+      "outcome_ok": true,
+      "escalation_ok": true,
+      "guardrail_ok": true,
+      "outcome": "escalated",
+      "tools": [
+        "escalate_to_human"
+      ],
+      "reply": "I've passed this to a specialist (ticket H-3D6B3A13). A specialist will contact the customer within 1 business day.",
+      "guardrail_hit": null
+    }
+  ]
+}

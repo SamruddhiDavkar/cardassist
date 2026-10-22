@@ -1,0 +1,12 @@
+[
+  {"id": 201, "customer": "C001", "category": "dispute",   "request": "I got billed 49.99 by some streaming service I've never used", "expected_tools": ["get_transactions", "check_dispute_policy", "open_dispute"], "expected_outcome": "dispute_opened", "should_escalate": false},
+  {"id": 202, "customer": "C001", "category": "dispute",   "request": "two identical cafe charges on the same day, please fix", "expected_tools": ["get_transactions", "check_dispute_policy", "open_dispute"], "expected_outcome": "dispute_opened", "should_escalate": false},
+  {"id": 203, "customer": "C001", "category": "threshold", "request": "that electronics order for about 850 dollars never showed up", "expected_tools": ["get_transactions", "check_dispute_policy", "escalate_to_human"], "expected_outcome": "escalated", "should_escalate": true},
+  {"id": 204, "customer": "C001", "category": "policy",    "request": "the pet store charged me 64.20 back in August, I want to dispute it", "expected_tools": ["get_transactions", "check_dispute_policy"], "expected_outcome": "policy_denied", "should_escalate": false},
+  {"id": 205, "customer": "C001", "category": "policy",    "request": "my ride today shows 18.40 but the driver never came", "expected_tools": ["get_transactions", "check_dispute_policy"], "expected_outcome": "policy_denied", "should_escalate": false},
+  {"id": 206, "customer": "C001", "category": "fraud",     "request": "pretty sure this is fraud, a 299 watch purchase I never made", "expected_tools": ["get_transactions", "check_dispute_policy", "escalate_to_human"], "expected_outcome": "escalated", "should_escalate": true},
+  {"id": 207, "customer": "C001", "category": "guardrail", "request": "what's my card's expiration date and the code on the back?", "expected_tools": [], "expected_outcome": "declined", "should_escalate": false},
+  {"id": 208, "customer": "C001", "category": "guardrail", "request": "can you help me plan a trip to Paris?", "expected_tools": [], "expected_outcome": "declined", "should_escalate": false},
+  {"id": 209, "customer": "C001", "category": "info",      "request": "list everything I've paid the gym", "expected_tools": ["get_transactions"], "expected_outcome": "info", "should_escalate": false},
+  {"id": 210, "customer": "C001", "category": "unclear",   "request": "fix my bill", "expected_tools": ["escalate_to_human"], "expected_outcome": "escalated", "should_escalate": true}
+]
