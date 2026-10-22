@@ -5,6 +5,11 @@ An AI agent that handles credit card dispute requests. A customer writes somethi
 checks the dispute rules, and either opens a dispute, explains why it can't, or hands the case
 to a human.
 
+![CI](https://github.com/SamruddhiDavkar/cardassist/actions/workflows/ci.yml/badge.svg)
+
+<img width="959" height="515" alt="image" src="https://github.com/user-attachments/assets/42b65590-47a5-442f-8657-3a2c56be9278" />
+
+
 Runs entirely on a laptop: **Llama 3.1 8B via Ollama** for function calling, **SQLite** with
 200 fake transactions, **Streamlit** chat UI, **pytest**, **Docker**, and **GitHub Actions** CI.
 
